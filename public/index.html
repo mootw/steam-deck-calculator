@@ -60,7 +60,7 @@
     </div>
     
     <div class="calculator_parameter">
-      5. Import data
+      5. Import data (optional, default is hoxeel data)
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
         <button onclick="getData('2-9-22-hoxeel.csv')">u/hoxeel (imported 2022-9-2)</button><br><br>
@@ -68,10 +68,9 @@
         here.
         <input type="file" id="file" />
       </div>
-      
     </div>
     
-    <div class="centered">
+    <div class="centered calculator_parameter">
       <!-- <button onclick="calculate(moo)">Calculate (moo's method)</button> -->
       <button onclick="calculate(gecked)">Calculate (gecked's method)</button>
     </div>
@@ -257,7 +256,7 @@
     update_data();
   }
 
-  //getData('2-9-22-hoxeel.csv');
+  getData('2-9-22-hoxeel.csv');
 </script>
 
 <!-- Import calculators -->
