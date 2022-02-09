@@ -1,0 +1,40 @@
+body {
+    /* color: white; */
+    background-color: rgb(165, 151, 177);
+    /* background-image: linear-gradient(to bottom right, rgb(104, 94, 242), rgb(111, 94, 242)); */
+}
+
+.calculator_parameters {
+    background-color: rgb(255, 255, 255, 0.25);
+    max-width: 50em;
+    padding: 1em;
+
+    margin: 0 auto; /* Center div */
+}
+
+.calculator_parameter {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.indent {
+    padding-left: 1em;
+}
+
+#results {
+    padding-top: 5em;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+a {
+    color: #aaffe3;
+}
+a:visited {
+    color: #aaffe3;
+} */
