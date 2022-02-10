@@ -15,6 +15,13 @@
 
     <h2 style="text-align: center;">Expected Order Date Calculator</h2>
     <p style="text-align: center;">Created by moo, contribute on <a href="https://github.com/MooNag/steam-deck-calculator">GitHub</a></p>
+    <p>
+      This calculator is designed to allow for extending it's ability as Valve releases more information.
+      The form that is provided collects as much data as possible, and is ready for collecting order confirmation emails too.
+      If anyone has their own data they have collected please contribute it, or let me know! If you are a developer, or have
+      an algo you want to add, please contribute!
+
+    </p>
 
     <div class="calculator_parameter">
       1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">https://forms.gle/vfU1UwU3NoYXNmiG8</a> with your
@@ -53,32 +60,39 @@
     </div>
     
     <div  class="calculator_parameter">
-      4. rtReserveTime (ex 1626454969):
-      <br>
-      <h5>Log into steam on your browser. Then visit SITEURL . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email (https://www.epochconverter.com/)</h5>
+      4. rtReserveTime (ex 1626454969, help below):<br>
       <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
+      
+      <h5 class="indent">Log into steam on your browser. Then visit
+        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D">https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D</a>
+        . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email if you convert it to a unix timestamp (https://www.epochconverter.com/)</h5>
+      
     </div>
     
     <div class="calculator_parameter">
-      5. Import data (optional, default is hoxeel data)
+      5. Import data (currently using: <span id="loaded_data"></span>)
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
-        <button onclick="getData('2-9-22-hoxeel.csv')">u/hoxeel (imported 2022-9-2)</button><br><br>
+        <button onclick="getData('2-9-22-hoxeel.csv')">u/hoxeel (~1600 responses imported)</button><br><br>
+        <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br>
         Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
         here.
         <input type="file" id="file" />
       </div>
     </div>
     
-    <div class="centered calculator_parameter">
-      <!-- <button onclick="calculate(moo)">Calculate (moo's method)</button> -->
-      <button onclick="calculate(gecked)">Calculate (gecked's method)</button>
+    <div class=" calculator_parameter">
+      6. Calculate your estimated order availabilty date, or contribute your own!
+      <div class="centered" style="padding-top: 1em;">
+        <!-- <button onclick="calculate(moo)">Calculate (moo's method)</button> -->
+        <button onclick="calculate(gecked)">gecked's method (does not support After Q2)</button>
+      </div>
     </div>
     
   </div>
 
   <h1 style="text-align: center;" id="results">
-    Your Estimated Order Date: ???????????????<br>
+    Estimated Order Date: ????????????<br>
     ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
   </h1>
   <p style="text-align: center;">
@@ -144,7 +158,7 @@
     var reader = new FileReader();
     reader.readAsText(file, "UTF-8");
     reader.onload = function (evt) {
-      dataFromCSVString(evt.target.result);
+      dataFromCSVString(evt.target.result, file.name);
     }
   }
   document.getElementById('file').addEventListener('change', customFileUpload, false);
@@ -170,7 +184,7 @@
 
 
       document.getElementById('results').innerHTML = `
-      Your Estimated Order Date: ${date.toDateString()}<br>
+      Estimated Order Date: ${date.toDateString()}<br>
       ${Math.floor(diff / (1000 * 60 * 60 * 24))} day(s)
       ${Math.floor((diff / (1000 * 60 * 60)) % 24)} hour(s)
       ${Math.floor((diff / 1000 / 60) % 60)} minute(s)
@@ -221,18 +235,18 @@
     }
   }
 
-  function dataFromCSVString(data) {
+  function dataFromCSVString(data, name) {
     const parsed = parseCSV(data);
     let responses = [];
     for (let i = 1; i < parsed.length; i++) {
       responses.push(new Response(parsed[i]));
     }
     loaded_data = new Data(responses);
-    alert('data loaded!');
+    document.getElementById('loaded_data').innerHTML = name;
   }
 
   function getData(url) {
-    fetch(url).then(response => response.text()).then((data) => dataFromCSVString(data));
+    fetch(url).then(response => response.text()).then((data) => dataFromCSVString(data, url.slice(0, -4)));
   }
 
   function calculate(algorythm) {
