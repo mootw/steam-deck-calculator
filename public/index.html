@@ -24,7 +24,7 @@
     </p>
 
     <div class="calculator_parameter">
-      1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">https://forms.gle/vfU1UwU3NoYXNmiG8</a> with your
+      1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">Steam Deck Shipment estimator form</a> with your
       information: 
       <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">Link
         to results
@@ -63,9 +63,9 @@
       4. rtReserveTime (ex 1626454969, help below):<br>
       <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
       
-      <h5 class="indent">Log into steam on your browser. Then visit
-        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D">https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D</a>
-        . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email if you convert it to a unix timestamp (https://www.epochconverter.com/)</h5>
+      <h5 class="indent">Log into Steam on your browser. Then visit
+        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D">the API for reservations</a>
+        . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email if you convert it to a unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
     </div>
     
     <div class="calculator_parameter">
