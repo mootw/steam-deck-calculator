@@ -107,7 +107,8 @@
   <p style="max-width: 80em;">
     Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day. 
     Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most accurate for the first
-    day of orders and the 512GB model due to that being where most of the sample data is.
+    day of orders and the 512GB model due to that being where most of the sample data is. This algo also generates a lot of cool data,
+    like orders over time, how many units will ship each month, etc... TODO extract and display the data.
   </p>
   <p style="max-width: 80em;">
     Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
