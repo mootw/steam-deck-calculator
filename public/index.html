@@ -20,7 +20,9 @@
       The form that is provided collects as much data as possible, and is ready for collecting order confirmation emails too.
       If anyone has their own data they have collected please contribute it, or let me know! If you are a developer, or have
       an algo you want to add, please contribute!
-
+    </p>
+    <p style="font-weight: bold;">
+      Disclaimer: This is an estimator. It creates magic numbers out of thin air. Assume the magic numbers are wrong. But copium is addicting!
     </p>
 
     <div class="calculator_parameter">
@@ -64,7 +66,7 @@
       <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
       
       <h5 class="indent">Log into Steam on your browser. Then visit
-        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D">the API for reservations</a>
+        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D" target="_blank">the API for reservations</a>
         . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email if you convert it to a unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
     </div>
     
@@ -72,7 +74,8 @@
       5. Import data (currently using: <span id="loaded_data"><i>No data imported </i></span>)
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
-        <button onclick="getData('2-9-22-hoxeel.csv')">u/hoxeel (~1600 responses imported)</button><br><br>
+        <button onclick="getData('2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
+        <button onclick="getData('2-11-22-moo.csv')">moo (~200 responses)</button><br><br>
         <!-- <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br> -->
         Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
         here.
@@ -83,7 +86,7 @@
     <div class=" calculator_parameter">
       6. Calculate your estimated order availabilty date, or contribute your own!
       <div class="centered" style="padding-top: 1em;">
-        <!-- <button onclick="calculate(moo)">Calculate (moo's method)</button> -->
+        <button onclick="calculate(moo)">moo's method</button>
         <button onclick="calculate(gecked)">gecked's method (does not support After Q2)</button>
       </div>
     </div>
@@ -95,13 +98,22 @@
     ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
   </h1>
   <p style="text-align: center;">
-    Orders are sent on a weekly basis after release.<br> Assuming release is feb 25th 10pm et. 
+    Orders are sent on a weekly basis after release.<br> Assuming release is feb 25th 10am est. 
   </p>
   
 
-  <br>
-  <br>
-  <br>
+
+  <h3 style="padding-top: 4em;">How does it work?</h3>
+  <p style="max-width: 80em;">
+    Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day. 
+    Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most accurate for the first
+    day of orders and the 512GB model due to that being where most of the sample data is.
+  </p>
+  <p style="max-width: 80em;">
+    Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
+  </p>
+  
+  
   <br>
   <br>
   TODO??:<br>
@@ -206,7 +218,7 @@
       this.model = data[2]; //"64", "256", "512"
       this.rtReserveTime = +data[3]; //preorder timestamp, number.
       this.firstValveUpdate = data[4]; //
-      this.secondValveUpdate = data[5]; //
+      this.latestValveUpdate = data[5]; //
     }
 
     isReserveTimeAfter(other) {
@@ -230,7 +242,17 @@
     }
 
     sortByPreorderTimestamp() {
-      return new Data(this.responses.sort((a, b) => b - a));
+      return new Data(this.responses.sort((a, b) => a.rtReserveTime - b.rtReserveTime));
+    }
+
+    //An attempt to reduce the sampling bias since more people with close dates have submitted data.
+    biasSample() {
+      //1626454800
+      //10000*(x+140)^-2 is the equation used where x is minutes passed since reservations open
+      return new Data(this.responses.filter((response) => {
+        const score = 10000*Math.pow((140+(response.rtReserveTime - 1626454800)), -2);
+        return Math.random() > score;
+      }));
     }
   }
 
@@ -269,7 +291,7 @@
     update_data();
   }
 
-  getData('2-9-22-hoxeel.csv');
+  getData('2-11-22-hoxeel-filtered.csv');
 </script>
 
 <!-- Import calculators -->

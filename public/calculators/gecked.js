@@ -16,40 +16,40 @@ I will also try to keep the data used by this code semi-up to date, so if you ev
 
 //Should return a Date object.
 function gecked(parameters, data) {
-if(parameters.order_avail == "After Q2") {
-    throw "this calculator does not work for after q2 dates";
-}
-
-//Filter data to only include this region and model.
-const filtered = data.whereModelIs(parameters.model).whereRegionIs(parameters.region);
-
-const daysInQuarter = parameters.order_avail === "Q1" ? 34 : 91;
-const ans = daysInQuarter / (filtered.responses.length - 1);
-
-let userQueuePos = 0;
-
-let x = 0;
-let confirm = 0;
-while(confirm == 0) {
-    if(parameters.rtReserveTime < filtered.responses[x].rtReserveTime && confirm == 0) {
-    userQueuePos = (x + 1);
-    confirm = 1;
+    if (parameters.order_avail == "After Q2") {
+        throw "this calculator does not work for after q2 dates";
     }
-    x += 1;
-}
 
-userDate = daysInQuarter / filtered.responses.length;
-userDate = Math.ceil(ans * userQueuePos);
+    //Filter data to only include this region and model.
+    const filtered = data.whereModelIs(parameters.model).whereRegionIs(parameters.region);
 
-const launchDate = new Date(1645812000000);
-const april = new Date(1648789200 * 1000);
-const millisInDay = 1000 * 60 * 60 * 24;
+    const daysInQuarter = parameters.order_avail === "Q1" ? 34 : 91;
+    const ans = daysInQuarter / (filtered.responses.length - 1);
 
-if(parameters.order_avail == "Q1") {
-    return new Date(launchDate.getTime() + (userDate * millisInDay));
-}
-if(parameters.order_avail == "Q2") {
-    return new Date(april.getTime() + ((userDate) * millisInDay));
-}
-throw "bad state";
+    let userQueuePos = 0;
+
+    let x = 0;
+    let confirm = 0;
+    while (confirm == 0) {
+        if (parameters.rtReserveTime < filtered.responses[x].rtReserveTime && confirm == 0) {
+            userQueuePos = (x + 1);
+            confirm = 1;
+        }
+        x += 1;
+    }
+
+    userDate = daysInQuarter / filtered.responses.length;
+    userDate = Math.ceil(ans * userQueuePos);
+
+    const launchDate = new Date(1645812000000);
+    const april = new Date(1648789200 * 1000);
+    const millisInDay = 1000 * 60 * 60 * 24;
+
+    if (parameters.order_avail == "Q1") {
+        return new Date(launchDate.getTime() + (userDate * millisInDay));
+    }
+    if (parameters.order_avail == "Q2") {
+        return new Date(april.getTime() + ((userDate) * millisInDay));
+    }
+    throw "bad state";
 }
