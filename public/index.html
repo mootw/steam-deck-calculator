@@ -183,10 +183,12 @@
   //Do the fun stuff to display the things!
   function update_data() {
     if (calculate_error != null) {
+      console.log("is arroere");
       document.getElementById('results').innerHTML = `<h1 style="color: red;">${calculate_error}</h1>`;
       return;
     }
     if (result !== null) {
+      console.log("is no arroere" + JSON.stringify(result));
 
       //Calculate the order email time.
       let launchTime = new Date(1645812000000); //feb 25th 10pm est
@@ -279,7 +281,7 @@
     fetch(url).then(response => response.text()).then((data) => dataFromCSVString(data, url.slice(0, -4)));
   }
 
-  function calculate(algorythm) {
+  async function calculate(algorythm) {
     algo = algorythm.name;
     if(loaded_data == null) {
       alert('No data loaded');
@@ -288,7 +290,7 @@
 
     calculate_error = undefined;
     try {
-      result = algorythm({
+      result = await algorythm({
         model: getLocalStorageOrDefault("model"),
         region: getLocalStorageOrDefault("region"),
         rtReserveTime: getLocalStorageOrDefault("rtReserveTime"),

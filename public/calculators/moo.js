@@ -16,6 +16,13 @@ const valveZones = {
   "Q2": 91
 }
 
+const demandRatios = {
+  "64": 1,
+  "256": 3,
+  "512": 5,
+  "SUM": 9 //sum of the other 3
+}
+
 
 //July 16
 const preorder_date = new Date(1626454800000);
@@ -45,8 +52,11 @@ async function moo(parameters, data) {
 
   //Calculate how much to scale the sample data-set.
   var averageScalar = (us256 + us512 + eu256 + eu512 + uk512 + us64) / 6;
-
+  
   // throw averageScalar;
+
+  var demandScalar = demandRatios[parameters.model]/demandRatios.SUM;
+  //var demandScalar = 1;
 
   //Filter by order queue
   let newData = data.whereModelIs(parameters.model).whereRegionIs(parameters.region);
@@ -68,7 +78,8 @@ async function moo(parameters, data) {
     }
 
     //Add in trends data.. This is truely magic numbers.
-    order_quantity[i] = order_quantity[i] + trends_data[i]; 
+    
+    order_quantity[i] = order_quantity[i] + (trends_data[i] * demandScalar); 
 
     //Do some data smoothing to get more realistic numbers.
     //Moving average.
@@ -129,7 +140,7 @@ async function moo(parameters, data) {
     counter+= valveThroughputDaily[i];
     if(counter > user_order_position) {
       //the day was found!
-      // throw i;
+      //throw i;
       return new Date(launchDate.getTime() + 1 + (i * 86400 * 1000));
     }
   }
