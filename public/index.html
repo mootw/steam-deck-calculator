@@ -202,14 +202,13 @@
 
       document.getElementById('results').innerHTML = `
       <h3>${algo} (${new Date(Date.now()).toDateString()})</h3>
-      <h1>Estimated Order Date: ${date.toDateString()}<br>
+      <h2>Estimated Order Date: ${date.toDateString()}<br>
       ${Math.floor(diff / (1000 * 60 * 60 * 24))} day(s)
       ${Math.floor((diff / (1000 * 60 * 60)) % 24)} hour(s)
       ${Math.floor((diff / 1000 / 60) % 60)} minute(s)
-      ${Math.floor((diff / 1000) % 60)} second(s)</h1>
+      ${Math.floor((diff / 1000) % 60)} second(s)</h2>
       
-      <h3>
-        Calculated: ${new Date(result).toDateString()}</h3>
+      
       `;
     }
   }
@@ -279,7 +278,7 @@
     fetch(url).then(response => response.text()).then((data) => dataFromCSVString(data, url.slice(0, -4)));
   }
 
-  function calculate(algorythm) {
+  async function calculate(algorythm) {
     algo = algorythm.name;
     if(loaded_data == null) {
       alert('No data loaded');
@@ -288,7 +287,7 @@
 
     calculate_error = undefined;
     try {
-      result = algorythm({
+      result = await algorythm({
         model: getLocalStorageOrDefault("model"),
         region: getLocalStorageOrDefault("region"),
         rtReserveTime: getLocalStorageOrDefault("rtReserveTime"),

@@ -23,8 +23,8 @@ function gecked(parameters, data) {
     //Filter data to only include this region and model.
     const filtered = data.whereModelIs(parameters.model).whereRegionIs(parameters.region);
 
-    const daysInQuarter = parameters.order_avail === "Q1" ? 34 : 91;
-    const ans = daysInQuarter / (filtered.responses.length - 1);
+    const daysInQuarter = parameters.order_avail === "Q1" ? 34 : parameters.quarter_avail == "Q2" ? 91 : 61;
+    const ans = daysInQuarter / filtered.responses.length;
 
     let userQueuePos = 0;
 
@@ -32,14 +32,14 @@ function gecked(parameters, data) {
     let confirm = 0;
     while (confirm == 0) {
         if (parameters.rtReserveTime < filtered.responses[x].rtReserveTime && confirm == 0) {
-            userQueuePos = (x + 1);
+            userQueuePos = x;
             confirm = 1;
         }
         x += 1;
     }
 
     userDate = daysInQuarter / filtered.responses.length;
-    userDate = Math.ceil(ans * userQueuePos);
+    userDate = Math.ceil(ans * (userQueuePos + 1));
 
     const launchDate = new Date(1645812000000);
     const april = new Date(1648789200 * 1000);
