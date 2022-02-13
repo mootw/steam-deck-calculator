@@ -85,20 +85,22 @@
     
     <div class=" calculator_parameter">
       6. Calculate your estimated order availabilty date, or contribute your own!
-      <div class="centered" style="padding-top: 1em;">
-        <button onclick="calculate(moo)">moo's method</button>
-        <button onclick="calculate(gecked)">gecked's method (does not support After Q2)</button>
-	<button onclick="calculate(abyzma)">abyzma's method (MEME algo)</button>
+      <div class="centered warp" style="padding-top: 1em;">
+        <button class="bigbutton" onclick="calculate(moo)">moo</button>
+        <button class="bigbutton" onclick="calculate(gecked)">gecked (does not support After Q2)</button>
+        <button class="bigbutton" onclick="calculate(abyzma)">abyzma (MEME)</button>
       </div>
     </div>
     
   </div>
 
-  <h1 style="text-align: center;" id="results">
-    Estimated Order Date: ????????????<br>
-    ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
-  </h1>
-  <p style="text-align: center;">
+  <div style="text-align: center;" id="results">
+    <h1>
+      Estimated Order Date: ????????????<br>
+      ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
+    </h1>
+  </div>
+  <p style="text-align: center; padding-top: 4em;">
     Orders are sent on a weekly basis after release.<br> Assuming release is feb 25th 10am est. 
   </p>
   
@@ -114,7 +116,9 @@
   <p style="max-width: 80em;">
     Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
   </p>
-  
+  <p style="max-width: 80em;">
+    Abyzma's method randomly selects a date within your quarter
+  </p>
   
   <br>
   <br>
@@ -179,7 +183,7 @@
   //Do the fun stuff to display the things!
   function update_data() {
     if (calculate_error != null) {
-      document.getElementById('results').innerHTML = `${calculate_error}`;
+      document.getElementById('results').innerHTML = `<h1 style="color: red;">${calculate_error}</h1>`;
       return;
     }
     if (result !== null) {
@@ -197,12 +201,15 @@
 
 
       document.getElementById('results').innerHTML = `
-      Estimated Order Date: ${date.toDateString()}<br>
+      <h3>${algo} (${new Date(Date.now()).toDateString()})</h3>
+      <h1>Estimated Order Date: ${date.toDateString()}<br>
       ${Math.floor(diff / (1000 * 60 * 60 * 24))} day(s)
       ${Math.floor((diff / (1000 * 60 * 60)) % 24)} hour(s)
       ${Math.floor((diff / 1000 / 60) % 60)} minute(s)
-      ${Math.floor((diff / 1000) % 60)} second(s)
-      <h5>Calculated: ${new Date(result).toDateString()}</h5>
+      ${Math.floor((diff / 1000) % 60)} second(s)</h1>
+      
+      <h3>
+        Calculated: ${new Date(result).toDateString()}</h3>
       `;
     }
   }
@@ -273,6 +280,7 @@
   }
 
   function calculate(algorythm) {
+    algo = algorythm.name;
     if(loaded_data == null) {
       alert('No data loaded');
       return;

@@ -34,6 +34,15 @@ body {
     justify-content: center;
 }
 
+.warp {
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.bigbutton {
+    padding: 0.5em;
+}
+
 /* 
 a {
     color: #aaffe3;
