@@ -65,9 +65,13 @@
       4. rtReserveTime (ex 1626454969, help below):<br>
       <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
       
-      <h5 class="indent">Log into Steam on your browser. Then visit
+      <h5 class="indent">Method A:
+        <a href="steam://openurl/https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D"><button>View in Steam</button></a>
+      and copy rtReserveTime from the response.</h5>
+      <h5 class="indent">Method B: Log into Steam on your browser. Then visit
         <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D" target="_blank">the API for reservations</a>
-        . Copy rtReserveTime from the response. You can also use the recieved time of your pre-order email if you convert it to a unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
+        . Copy rtReserveTime from the response.</h5>
+      <h5 class="indent">Method C: You can also use the received time of your pre-order email if you convert it to an unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
     </div>
     
     <div class="calculator_parameter">
