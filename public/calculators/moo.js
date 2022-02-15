@@ -1,6 +1,8 @@
 //Moo's method for calculating
 //Should return a Date object.
 
+//TODO https://docs.google.com/spreadsheets/d/1OFNnFoN3LsyFqK3gU39x5BXevnWVFaH86CC_3NV0-mk/edit#gid=0
+
 analyitcs_cache = undefined;
 
 //Magic numbers
