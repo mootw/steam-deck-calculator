@@ -90,7 +90,7 @@
     <div class=" calculator_parameter">
       6. Calculate your estimated order availabilty date, or contribute your own!
       <div class="centered warp" style="padding-top: 1em;">
-        <button class="bigbutton" onclick="calculate(moo)">moo</button>
+        <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
         <button class="bigbutton" onclick="calculate(gecked)">gecked (does not support After Q2)</button>
         <button class="bigbutton" onclick="calculate(abyzma)">abyzma (MEME)</button>
       </div>
@@ -187,13 +187,10 @@
   //Do the fun stuff to display the things!
   function update_data() {
     if (calculate_error != null) {
-      console.log("is arroere");
       document.getElementById('results').innerHTML = `<h1 style="color: red;">${calculate_error}</h1>`;
       return;
     }
     if (result !== null) {
-      console.log("is no arroere" + JSON.stringify(result));
-
       //Calculate the order email time.
       let launchTime = new Date(1645812000000); //feb 25th 10pm est
       var emailTime = undefined;
