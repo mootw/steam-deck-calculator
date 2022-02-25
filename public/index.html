@@ -79,7 +79,7 @@
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
         <button onclick="getData('2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
-        <button onclick="getData('2-11-22-moo.csv')">moo (~200 responses)</button><br><br>
+        <button onclick="getData('2-25-22-moo.csv')">moo (~1200 responses)</button><br><br>
         <!-- <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br> -->
         Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
         here.
@@ -91,7 +91,7 @@
       6. Calculate your estimated order availabilty date, or contribute your own!
       <div class="centered warp" style="padding-top: 1em;">
         <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
-        <button class="bigbutton" onclick="calculate(gecked)">gecked (does not support After Q2)</button>
+        <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link to his site)</button></a>
         <button class="bigbutton" onclick="calculate(abyzma)">abyzma (MEME)</button>
       </div>
     </div>
@@ -105,7 +105,7 @@
     </h1>
   </div>
   <p style="text-align: center; padding-top: 4em;">
-    Orders are sent on a weekly basis after release.<br> Assuming release is feb 25th 10am est. 
+    Orders are sent on a weekly basis. Each batch of emails will be on Mondays except launch day (<a href="https://store.steampowered.com/news/app/1675180/view/3113680716504852534">source</a>)<br> Release was Feb 25th 10am est. 
   </p>
   
 
@@ -192,7 +192,7 @@
     }
     if (result !== null) {
       //Calculate the order email time.
-      let launchTime = new Date(1645812000000); //feb 25th 10pm est
+      let launchTime = new Date(1646071200000); //feb 25th 10pm est
       var emailTime = undefined;
       while(new Date(result).getTime() > launchTime.getTime()) {
         emailTime = launchTime;
@@ -201,7 +201,6 @@
       
       const date = new Date(emailTime);
       const diff = date.getTime() - Date.now();
-
 
       document.getElementById('results').innerHTML = `
       <h3>${algo} (${new Date(Date.now()).toDateString()})</h3>
@@ -256,15 +255,6 @@
       return new Data(this.responses.sort((a, b) => a.rtReserveTime - b.rtReserveTime));
     }
 
-    //An attempt to reduce the sampling bias since more people with close dates have submitted data.
-    biasSample() {
-      //1626454800
-      //10000*(x+140)^-2 is the equation used where x is minutes passed since reservations open
-      return new Data(this.responses.filter((response) => {
-        const score = 10000*Math.pow((140+(response.rtReserveTime - 1626454800)), -2);
-        return Math.random() > score;
-      }));
-    }
   }
 
   function dataFromCSVString(data, name) {

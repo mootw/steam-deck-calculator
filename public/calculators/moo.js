@@ -1,6 +1,8 @@
 //Moo's method for calculating
 //Should return a Date object.
 
+//TODO https://docs.google.com/spreadsheets/d/1OFNnFoN3LsyFqK3gU39x5BXevnWVFaH86CC_3NV0-mk/edit#gid=0
+
 analyitcs_cache = undefined;
 
 //Magic numbers
@@ -35,8 +37,10 @@ const regionDemandRatio = {
 
 //July 16
 const preorder_date = new Date(1626454800000);
-//Feb 25
-const launchDate = new Date(1645812000000);
+//Feb 25 now feb 28th
+//Modified to have orders go out every monday because of valve logistics update
+//https://store.steampowered.com/news/app/1675180/view/3113680716504852534
+const launchDate = new Date(1646071200000);
 
 //Wont update unless u refresh page oh well..
 const minsSincePreorder = Math.floor((Date.now() - preorder_date.getTime()) / 1000 / 60);
