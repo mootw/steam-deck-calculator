@@ -1,7 +1,7 @@
 
 function abyzma(parameters, data) {
  
-	const minQ1 = (1645812000000)
+	const minQ1 = (1646676000000)
 	const maxQ1 = (1648749600000)
 	const Q1Result = Math.floor(Math.random() * (maxQ1 - minQ1 + 1)) + minQ1;
 	
@@ -10,7 +10,7 @@ function abyzma(parameters, data) {
 	const Q2Result = Math.floor(Math.random() * (maxQ2 - minQ2 + 1)) + minQ2;
 	
 	const minAQ2 = (1656698400000)
-	const maxAQ2 = (2209057200000)
+	const maxAQ2 = (3382365600000)
 	const AQ2Result = Math.floor(Math.random() * (maxAQ2 - minAQ2 + 1)) + minAQ2;
 	
 
