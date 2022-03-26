@@ -57,7 +57,8 @@
       <select name="Order availabilty" id="order_avail" onchange="updateAndStore('order_avail')">
         <option value="Q1">Q1</option>
         <option value="Q2">Q2</option>
-        <option value="After Q2">After Q2</option>
+        <option value="Q3">After Q2</option>
+        <option value="After Q3">After Q2</option>
       </select>
     </div>
     
@@ -78,8 +79,8 @@
       5. Import data (currently using: <span id="loaded_data"><i>No data imported </i></span>)
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
+        <button onclick="getData('3-26-22-moo.csv')">moo (~2800 responses)</button><br><br>
         <button onclick="getData('2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
-        <button onclick="getData('2-25-22-moo.csv')">moo (~1200 responses)</button><br><br>
         <!-- <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br> -->
         Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
         here.
@@ -91,8 +92,9 @@
       6. Calculate your estimated order availabilty date, or contribute your own!
       <div class="centered warp" style="padding-top: 1em;">
         <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
-        <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link to his site)</button></a>
+        <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link)</button></a>
         <button class="bigbutton" onclick="calculate(abyzma)">abyzma</button>
+        <a href="https://colab.research.google.com/drive/1TzC_cQIIhplKAd1ceHxABS9FFtFaoyMt"><button class="bigbutton">jimmosio (link)</button></a>
       </div>
     </div>
     
