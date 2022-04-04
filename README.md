@@ -15,4 +15,6 @@ Simple nginx dockerfile can be run with:
 `docker run <imageid> -p <random_port>:80`
 
 TODO
- - add cool stats like distributions and charts
+ - Add cool stats like distributions and charts
+ - Migrate CSV to database
+ - Automatically take user input and add to database 
