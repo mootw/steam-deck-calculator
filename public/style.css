@@ -62,6 +62,7 @@ body {
     width: 100%;
     padding-top: 4px;
     border-radius: 10px 10px 0 0;
+    font-weight: bold;
 }
 
 .calculator_parameter_body {

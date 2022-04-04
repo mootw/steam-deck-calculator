@@ -15,6 +15,4 @@ Simple nginx dockerfile can be run with:
 `docker run <imageid> -p <random_port>:80`
 
 TODO
- - add docs for csv data format.
- - update site to have css
  - add cool stats like distributions and charts

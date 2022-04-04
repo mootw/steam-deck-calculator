@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <script src="csv_parse.js"></script>
+  <script src="javascript/csv_parse.js"></script>
   <link rel="stylesheet" href="style.css">
   <title>Steam Deck Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,27 +24,6 @@
         If anyone has their own data they have collected please contribute it, or let me know! If you are a developer,
         or have
         an algo you want to add, please contribute!
-      </p>
-
-      <h3 style="padding-top: 1em;">How does it work?</h3>
-
-      <p style="max-width: 80em;">
-        <ul>
-          <li>
-          Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day.
-          Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most
-          accurate for the first
-          day of orders and the 512GB model due to that being where most of the sample data is. This algo also generates a lot
-          of cool data,
-          like orders over time, how many units will ship each month, etc... TODO extract and display the data.
-          </li>
-        <li> 
-          Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
-        </li>
-        <li>
-          Abyzma's method randomly selects a date within your quarter
-        </li>
-        </ul>
       </p>
 
       <p style="padding-top: 1em;">
@@ -162,7 +141,25 @@
       <div class="calculator_parameter_header">
         <p>Step 7: Calculate your estimated order availabilty date, or contribute your own! </p>
       </div>
-      <div class="calculator_parameter_body" style="height:80px">
+      <div class="calculator_parameter_body" style="height:250px; text-align: left;">
+        <p style="max-width: 80em; text-align: left;">
+          <ul>
+            <li>
+            Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day.
+            Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most
+            accurate for the first
+            day of orders and the 512GB model due to that being where most of the sample data is. This algo also generates a lot
+            of cool data,
+            like orders over time, how many units will ship each month, etc... TODO extract and display the data.
+            </li>
+          <li> 
+            Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
+          </li>
+          <li>
+            Abyzma's method randomly selects a date within your quarter
+          </li>
+          </ul>
+        </p>
         <div class="centered warp" style="padding-top: 1em;">
           <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
           <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link)</button></a>
@@ -175,14 +172,14 @@
 
     <div class="calculator_parameter">
       <div class="calculator_parameter_header">
-        <p>Your Results</p>
+        <p>Your Estimate</p>
       </div>
       <div class="calculator_parameter_body" style="height:120px">
         <div style="text-align: center; padding-top: 0;" id="results">
-          <h1>
+          <h3>
             Estimated Order Date: ????????????<br>
             ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
-          </h1>
+          </h3>
         </div>
       </div>
     </div>
