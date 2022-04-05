@@ -271,7 +271,7 @@ function getOrdersThatAreInTimeFrame (data, timeframe) {
 //TODO scale this data for each model... Right now it is not.
 async function getGoogleTrendsData () {
 
-  const data = await (await fetch('2-12-22-google-trends-steam-deck.csv')).text();
+  const data = await (await fetch('data/2-12-22-google-trends-steam-deck.csv')).text();
   const parsed = parseCSV(data);
 
   let mins = Array(Math.ceil(minsSincePreorder));
