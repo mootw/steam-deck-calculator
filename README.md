@@ -1,3 +1,6 @@
+[![Container Build](https://github.com/MooNag/steam-deck-calculator/actions/workflows/build.yml/badge.svg)](https://github.com/MooNag/steam-deck-calculator/actions/workflows/build.yml)
+[![HTML Validate](https://github.com/MooNag/steam-deck-calculator/actions/workflows/validate.yml/badge.svg)](https://github.com/MooNag/steam-deck-calculator/actions/workflows/validate.yml)
+
 # steam-deck-calculator
 
 Site to estimate order availability for the steam deck.
