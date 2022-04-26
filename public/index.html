@@ -25,6 +25,7 @@
       Disclaimer: This is an estimator. It creates magic numbers out of thin air. Assume the magic numbers are wrong. But copium is addicting!
     </p>
 
+	<h2> Step 0.5 - Add your results using the Google Form. (This helps to make the Moo algorithm more accurate. It's optional but recommended and appreciated.) </h2>
     <div class="calculator_parameter">
       1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">Steam Deck Shipment estimator form</a> with your
       information: 
@@ -34,6 +35,7 @@
       <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLZaRMIVknUubuHjhfXU_x6VEAifId-n7rIhi6DVTPTcLWNw/viewform?embedded=true" width="600" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe><br> -->
     </div>
     
+	<h2> Step 1 - Now it's time for the good stuff, first, enter your Steam Deck model. (The one you reserved, not the one you wanted!) </h2>
     <div class="calculator_parameter">
       2. Model:
       <select name="Model" id="model" onchange="updateAndStore('model')">
@@ -43,6 +45,7 @@
       </select>
     </div>
 
+	<h2> Step 2 - Now it's time to enter the region your Steam Account is on.</h2>
     <div class="calculator_parameter">
       3. Region:
       <select name="Region" id="region" onchange="updateAndStore('region')">
@@ -52,6 +55,7 @@
       </select>
     </div>
 
+	<h2> Step 3 - What does the Steam Page say your excpected avaliability is? (Q1, Q2, Q3, or after Q3. You can go to the Steam Deck page while signed in to view this.)</h2>
     <div class="calculator_parameter">
       3. Current Valve Estimated Order Availabilty:
       <select name="Order availabilty" id="order_avail" onchange="updateAndStore('order_avail')">
@@ -61,7 +65,8 @@
         <option value="After Q3">After Q3</option>
       </select>
     </div>
-    
+
+	<h2> Step 4 - Figure out your unix time stamp for when you reserved it. (Unix time stamps basically are normal time stamps on crack. They help make sure everyone is in the exact order in queue.)</h2>
     <div  class="calculator_parameter">
       4. rtReserveTime (ex 1626454969, help below):<br>
       <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
@@ -75,11 +80,12 @@
       <h5 class="indent">Method C: You can also use the received time of your pre-order email if you convert it to an unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
     </div>
     
+	<h2> Step 5 - How do you want the site to figure out all of this? (The Moo algorithm is recommended, and will be updated periodically with the newest data.) </h2>
     <div class="calculator_parameter">
       5. Import data (currently using: <span id="loaded_data"><i>No data imported </i></span>)
       <div class="indent">
         <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
-        <button onclick="getData('3-26-22-moo.csv')">moo (~2800 responses)</button><br><br>
+        <button onclick="getData('4-26-22-moo.csv')">moo (~2800 responses)</button><br><br>
         <button onclick="getData('2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
         <!-- <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br> -->
         Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
@@ -88,6 +94,7 @@
       </div>
     </div>
     
+	<h2> Step 6 - Do the calculation! Personally I would choose the "Calculate with Moo (V2 Model)" button, but I'm text on a screen, so what do I know.</h2>
     <div class=" calculator_parameter">
       6. Calculate your estimated order availabilty date, or contribute your own!
       <div class="centered warp" style="padding-top: 1em;">
