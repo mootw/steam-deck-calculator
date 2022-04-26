@@ -2,9 +2,14 @@
 
 body {
     /* color: white; */
-    background-color: rgb(255, 58, 248);
+    background-color: rgb(178, 0, 255);
     /* background-image: linear-gradient(to bottom right, rgb(104, 94, 242), rgb(111, 94, 242)); */
     font-family: "Roboto", sans-serif;
+}
+
+.disclaimer {
+	font-size: 19px;
+	color: red
 }
 
 .calculator_parameters {
