@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Water+Brush');
 
 body {
     /* color: white; */
@@ -31,6 +32,7 @@ body {
 
 #results {
     padding-top: 5em;
+	font-family: "Water Brush"
 }
 
 .centered {

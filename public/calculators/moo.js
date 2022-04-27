@@ -17,7 +17,8 @@ analyitcs_cache = undefined;
 //Mins in each duration
 const daysInQuarter = {
   "Q1": 34,
-  "Q2": 91
+  "Q2": 91,
+  "Q3": 92
 }
 
 //Taken from leaked pre-order quantity
