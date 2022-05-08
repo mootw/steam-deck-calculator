@@ -1,0 +1,24 @@
+name: HTML Validate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Validate-HTML:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Validate HTML
+      uses: anishathalye/proof-html@v1
+      with:
+        directory: ./public
+        check_favicon: false
+        empty_alt_ignore: true
+        retries: 1
+        url_ignore: |
+          https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=[595603,595604,595605]
+          https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D

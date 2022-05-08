@@ -1,0 +1,14 @@
+name: Container Build Check
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  Container-Build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag steam-deck-calculator:$(date +%s)

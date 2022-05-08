@@ -3,139 +3,194 @@
 
 <head>
   <meta charset="UTF-8">
-  <script src="csv_parse.js"></script>
+  <script src="javascript/csv_parse.js"></script>
   <link rel="stylesheet" href="style.css">
   <title>Steam Deck Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+  <div class="banner">
+    <img src="Images/SteamDeck.png" style="height: 60px; z-index: -1; position: absolute; margin-top: 20px;"/>
+    <p class="banner_text"> Steam Deck: Expected Order Date Calculator</p>
+  </div>
 
   <div class="calculator_parameters">
+    <div class="class_parameter">
+      <p>
+        This calculator is designed to allow for extending it's ability as Valve releases more information.
+        The form that is provided collects as much data as possible, and is ready for collecting order confirmation
+        emails too.
+        If anyone has their own data they have collected please contribute it, or let me know! If you are a developer,
+        or have
+        an algo you want to add, please contribute!
+      </p>
 
-    <h2 style="text-align: center;">Expected Order Date Calculator</h2>
-    <p style="text-align: center;">Created by moo, contribute on <a href="https://github.com/MooNag/steam-deck-calculator">GitHub</a></p>
-    <p>
-      This calculator is designed to allow for extending it's ability as Valve releases more information.
-      The form that is provided collects as much data as possible, and is ready for collecting order confirmation emails too.
-      If anyone has their own data they have collected please contribute it, or let me know! If you are a developer, or have
-      an algo you want to add, please contribute!
-    </p>
-    <p style="font-weight: bold;">
-      Disclaimer: This is an estimator. It creates magic numbers out of thin air. Assume the magic numbers are wrong. But copium is addicting!
-    </p>
+      <p style="padding-top: 1em;">
+        Orders are sent on a weekly basis. Each batch of emails will be on Mondays except launch day (<a
+          href="https://store.steampowered.com/news/app/1675180/view/3113680716504852534">source</a>)<br> Release was
+        Feb
+        25th 10am est.
+      </p>
 
-    <div class="calculator_parameter">
-      1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">Steam Deck Shipment estimator form</a> with your
-      information: 
-      <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">Link
-        to results
-        spreadsheet</a><br>
-      <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLZaRMIVknUubuHjhfXU_x6VEAifId-n7rIhi6DVTPTcLWNw/viewform?embedded=true" width="600" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe><br> -->
-    </div>
-    
-    <div class="calculator_parameter">
-      2. Model:
-      <select name="Model" id="model" onchange="updateAndStore('model')">
-        <option value="64">64 GB</option>
-        <option value="256">256 GB</option>
-        <option value="512">512 GB</option>
-      </select>
+      <p style="font-weight: bold;">
+        Disclaimer: This is an estimator. It creates magic numbers out of thin air. Assume the magic numbers are wrong.
+        But copium is addicting!
+      </p>
     </div>
 
     <div class="calculator_parameter">
-      3. Region:
-      <select name="Region" id="region" onchange="updateAndStore('region')">
-        <option value="US">US</option>
-        <option value="UK">UK</option>
-        <option value="EU">EU</option>
-      </select>
-    </div>
-
-    <div class="calculator_parameter">
-      3. Current Valve Estimated Order Availabilty:
-      <select name="Order availabilty" id="order_avail" onchange="updateAndStore('order_avail')">
-        <option value="Q1">Q1</option>
-        <option value="Q2">Q2</option>
-        <option value="Q3">Q3</option>
-        <option value="After Q3">After Q3</option>
-      </select>
-    </div>
-    
-    <div  class="calculator_parameter">
-      4. rtReserveTime (ex 1626454969, help below):<br>
-      <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span id="time_display"></span>
-      
-      <h5 class="indent">Method A:
-        <a href="steam://openurl/https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D"><button>View in Steam</button></a>
-      and copy rtReserveTime from the response. <i>If you see a black screen, highlight or press CTRL + A to highlight, the text might also be black</i></h5>
-      <h5 class="indent">Method B: Log into Steam on your browser. Then visit
-        <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D" target="_blank">the API for reservations</a>
-        . Copy rtReserveTime from the response.</h5>
-      <h5 class="indent">Method C: You can also use the received time of your pre-order email if you convert it to an unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
-    </div>
-    
-    <div class="calculator_parameter">
-      5. Import data (currently using: <span id="loaded_data"><i>No data imported </i></span>)
-      <div class="indent">
-        <!-- <button onclick="getData('latest.csv')">moo latest (imported never. not enough data yet)</button><br> -->
-        <button onclick="getData('3-26-22-moo.csv')">moo (~2800 responses)</button><br><br>
-        <button onclick="getData('2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
-        <!-- <button onclick="getData('2-9-22-moo.csv')"> (~1600 responses imported)</button><br><br> -->
-        Upload the latest data manually. Export the <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing" target="_blank">spreadsheet</a> as a CSV, then upload it
-        here.
-        <input type="file" id="file" />
+      <div class="calculator_parameter_header">
+        <p> Step 1: Fill our spreadsheet (Optional: but more accurate if you do) </p>
+      </div>
+      <div class="calculator_parameter_body">
+        1. Fill out <a href='https://forms.gle/vfU1UwU3NoYXNmiG8' target="_blank">Steam Deck Shipment estimator form</a>
+        with your
+        information:
+        <a href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing"
+          target="_blank">Link
+          to results
+          spreadsheet</a><br>
+        <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLZaRMIVknUubuHjhfXU_x6VEAifId-n7rIhi6DVTPTcLWNw/viewform?embedded=true" width="600" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe><br> -->
       </div>
     </div>
-    
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p> Step 2: Model </p>
+      </div>
+      <div class="calculator_parameter_body">
+        <select name="Model" id="model" onchange="updateAndStore('model')">
+          <option value="64">64 GB</option>
+          <option value="256">256 GB</option>
+          <option value="512">512 GB</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p> Step 3: Region </p>
+      </div>
+      <div class="calculator_parameter_body">
+        <select name="Region" id="region" onchange="updateAndStore('region')">
+          <option value="US">US</option>
+          <option value="UK">UK</option>
+          <option value="EU">EU</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p> Step 4: Current Valve Estimated Order Availability </p>
+      </div>
+      <div class="calculator_parameter_body">
+        <select name="Order availabilty" id="order_avail" onchange="updateAndStore('order_avail')">
+          <option value="Q1">Q1</option>
+          <option value="Q2">Q2</option>
+          <option value="Q3">Q3</option>
+          <option value="After Q3">After Q3</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p> Step 5: Getting the rtReserveTime </p>
+      </div>
+      <div class="calculator_parameter_body" style="height: 200px;">
+        <input type="number" step="60" id="rtReserveTime" onchange="updateTimeDisplay()"> <span
+          id="time_display"></span>
+        <h5 class="indent">Method A:
+          <a
+            href="steam://openurl/https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D"><button>View
+              in Steam</button></a>
+          and copy rtReserveTime from the response. <i>If you see a black screen, highlight or press CTRL + A to
+            highlight, the text might also be black</i>
+        </h5>
+        <h5 class="indent">Method B: Log into Steam on your browser. Then visit
+          <a href="https://store.steampowered.com/reservation/ajaxgetuserstate?rgReservationPackageIDs=%5B595603,595604,595605%5D"
+            target="_blank">the API for reservations</a>
+          . Copy rtReserveTime from the response.
+        </h5>
+        <h5 class="indent">Method C: You can also use the received time of your pre-order email if you convert it to an
+          unix timestamp (<a href="https://www.epochconverter.com/" target="_blank">epochconverter.com</a>)</h5>
+      </div>
+    </div>
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p>Step 6: Import data (Using: <span id="loaded_data"><i>No data imported </i></span>)</p>
+      </div>
+      <div class="calculator_parameter_body" style="height:170px">
+        <div class="indent">
+          <button onclick="getData('https:\/\/docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/gviz/tq?tqx=out:csv')">moo latest</button><br><br>
+          <button onclick="getData('data/3-26-22-moo.csv')">moo (~2800 responses)</button><br><br>
+          <button onclick="getData('data/2-11-22-hoxeel-filtered.csv')">u/hoxeel filtered (~1400 responses)</button><br><br>
+          Upload the latest data manually. Export the <a
+            href="https://docs.google.com/spreadsheets/d/1QqlSUpqhyBCBYeu_gW4w5vIxfcd7qablSviALDFJ0Dg/edit?usp=sharing"
+            target="_blank">spreadsheet</a> as a CSV, then upload it
+          here.
+          <input type="file" id="file" />
+        </div>
+      </div>
+    </div>
+
     <div class=" calculator_parameter">
-      6. Calculate your estimated order availabilty date, or contribute your own!
-      <div class="centered warp" style="padding-top: 1em;">
-        <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
-        <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link)</button></a>
-        <button class="bigbutton" onclick="calculate(abyzma)">abyzma</button>
-        <a href="https://colab.research.google.com/drive/1TzC_cQIIhplKAd1ceHxABS9FFtFaoyMt"><button class="bigbutton">jimmosio (link)</button></a>
+      <div class="calculator_parameter_header">
+        <p>Step 7: Calculate your estimated order availabilty date, or contribute your own! </p>
+      </div>
+      <div class="calculator_parameter_body" style="height:250px; text-align: left;">
+        <p style="max-width: 80em; text-align: left;">
+          <ul>
+            <li>
+            Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day.
+            Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most
+            accurate for the first
+            day of orders and the 512GB model due to that being where most of the sample data is. This algo also generates a lot
+            of cool data,
+            like orders over time, how many units will ship each month, etc... TODO extract and display the data.
+            </li>
+          <li> 
+            Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
+          </li>
+          <li>
+            Abyzma's method randomly selects a date within your quarter
+          </li>
+          </ul>
+        </p>
+        <div class="centered warp" style="padding-top: 1em;">
+          <button class="bigbutton" onclick="calculate(mooV2)">moo (v2 model)</button>
+          <a href="https://replit.com/@jplayzgamegm/SDDC?v=1"><button class="bigbutton">gecked (link)</button></a>
+          <button class="bigbutton" onclick="calculate(abyzma)">abyzma</button>
+          <a href="https://colab.research.google.com/drive/1TzC_cQIIhplKAd1ceHxABS9FFtFaoyMt"><button
+              class="bigbutton">jimmosio (link)</button></a>
+        </div>
       </div>
     </div>
-    
+
+    <div class="calculator_parameter">
+      <div class="calculator_parameter_header">
+        <p>Your Estimate</p>
+      </div>
+      <div class="calculator_parameter_body" style="height:120px">
+        <div style="text-align: center; padding-top: 0;" id="results">
+          <h3>
+            Estimated Order Date: ????????????<br>
+            ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
+          </h3>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div style="text-align: center;" id="results">
-    <h1>
-      Estimated Order Date: ????????????<br>
-      ??? day(s) ?? hour(s) ?? minute(s) ?? second(s)
-    </h1>
-  </div>
-  <p style="text-align: center; padding-top: 4em;">
-    Orders are sent on a weekly basis. Each batch of emails will be on Mondays except launch day (<a href="https://store.steampowered.com/news/app/1675180/view/3113680716504852534">source</a>)<br> Release was Feb 25th 10am est. 
-  </p>
-  
-
-
-  <h3 style="padding-top: 4em;">How does it work?</h3>
-  <p style="max-width: 80em;">
-    Moo's method attempts to simulate the number of deck orders each minute and Valve's throughput of decks each day. 
-    Then it calculates the estimated ship date based on throughput each day. It supports almost any date, but is most accurate for the first
-    day of orders and the 512GB model due to that being where most of the sample data is. This algo also generates a lot of cool data,
-    like orders over time, how many units will ship each month, etc... TODO extract and display the data.
-  </p>
-  <p style="max-width: 80em;">
-    Gecked's method interpolates estimated dates in the sample data. This means it does not support After Q2 dates.
-  </p>
-  <p style="max-width: 80em;">
-    Abyzma's method randomly selects a date within your quarter
-  </p>
-  
-  <br>
-  <br>
-  TODO??:<br>
-  - Raw data viewer<br>
-  - Digest of order ratios, graphs<br>
-  - Include a table of region, model, and pre-order time compared to estimated order time<br>
 </body>
 
+<footer class="footer">
+  <p class="footer_text">Created by moo, contribute on <a
+      href="https://github.com/MooNag/steam-deck-calculator">GitHub</a></p>
+</footer>
 </html>
-
 <script>
 
   loaded_data = null;
@@ -196,11 +251,11 @@
       //Calculate the order email time.
       let launchTime = new Date(1646071200000); //feb 25th 10pm est
       var emailTime = undefined;
-      while(new Date(result).getTime() > launchTime.getTime()) {
+      while (new Date(result).getTime() > launchTime.getTime()) {
         emailTime = launchTime;
         launchTime = new Date(launchTime.getTime() + 6.048e+8);
       }
-      
+
       const date = new Date(emailTime);
       const diff = date.getTime() - Date.now();
 
@@ -275,7 +330,7 @@
 
   async function calculate(algorythm) {
     algo = algorythm.name;
-    if(loaded_data == null) {
+    if (loaded_data == null) {
       alert('No data loaded');
       return;
     }
@@ -295,11 +350,10 @@
     update_data();
   }
 
-  getData('2-11-22-hoxeel-filtered.csv');
+  getData('data/2-11-22-hoxeel-filtered.csv');
 </script>
 
 <!-- Import calculators -->
 <script src="calculators/moo.js"></script>
 <script src="calculators/gecked.js"></script>
 <script src="calculators/abyzma.js"></script>
-

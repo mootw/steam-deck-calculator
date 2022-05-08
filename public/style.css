@@ -1,23 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-    /* color: white; */
-    background-color: rgb(165, 151, 177);
-    /* background-image: linear-gradient(to bottom right, rgb(104, 94, 242), rgb(111, 94, 242)); */
+    background-color: white;
     font-family: "Roboto", sans-serif;
+    margin: 0;
+}
+
+.banner {
+    width: 100%;
+    height: 5em;
+    margin: 0;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(207, 90, 255, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    position: fixed;
+    -webkit-box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.51);
+    box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.51);
+}
+
+.banner_text {
+    margin-top: 0;
+    padding-top: 1em;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.footer {
+    height: 2em;
+    background-color: white;
+    width: 100%;
+    background-color: #d9d9d9;
+}
+
+.footer_text {
+    text-align: right;
+    margin-right: 10px;
+    color: grey;
+    padding-top: 5px;
 }
 
 .calculator_parameters {
-    background-color: rgb(255, 255, 255, 0.25);
     max-width: 50em;
-    padding: 1em;
-
-    margin: 0 auto; /* Center div */
+    padding: 5em 1em 1em 1em;
+    margin: 0 auto;
 }
 
 .calculator_parameter {
     margin-top: 2em;
     margin-bottom: 1em;
+    background-color: white;
+    text-align: center;
+    -webkit-box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.51);
+    box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.51);
+    border-radius: 10px;
+}
+
+.calculator_parameter_header {
+    height: 50px;
+    background-color: #d9d9d9;
+    width: 100%;
+    padding-top: 4px;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}
+
+.calculator_parameter_body {
+    height: 3em;
+    background-color: white;
+    padding-top: 15px;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
 }
 
 .indent {
@@ -42,11 +95,3 @@ body {
 .bigbutton {
     padding: 0.5em;
 }
-
-/* 
-a {
-    color: #aaffe3;
-}
-a:visited {
-    color: #aaffe3;
-} */
