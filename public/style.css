@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Water+Brush');
 
 body {
     /* color: white; */
-    background-color: rgb(165, 151, 177);
+    background-color: rgb(0, 255, 127);
     /* background-image: linear-gradient(to bottom right, rgb(104, 94, 242), rgb(111, 94, 242)); */
     font-family: "Roboto", sans-serif;
+}
+
+.disclaimer {
+	font-size: 19px;
+	color: red
 }
 
 .calculator_parameters {
